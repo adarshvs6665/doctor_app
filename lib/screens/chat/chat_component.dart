@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:doctor_app/screens/patient/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:doctor_app/controllers/userController.dart';
@@ -11,12 +12,14 @@ class ChatComponent extends StatefulWidget {
   final String chatName;
   final String chatId;
   final String chatType;
+  final String recepientId;
 
   const ChatComponent(
       {Key? key,
       required this.chatName,
       required this.chatId,
-      required this.chatType})
+      required this.chatType,
+      required this.recepientId})
       : super(key: key);
 
   @override
@@ -132,7 +135,7 @@ class _ChatComponentState extends State<ChatComponent> {
     });
 
     socket!.onConnect((_) {
-      // print('Connected to Socket.IO server');
+      print('Connected to Socket.IO server');
       // Emit an event or perform any necessary actions upon connection
       // For example, you can emit an event to join the group chat room
       socket!.emit('joinGroupChat', {'chatId': widget.chatId});
@@ -189,6 +192,21 @@ class _ChatComponentState extends State<ChatComponent> {
       appBar: AppBar(
         title: Text(chatName),
         backgroundColor: const Color.fromARGB(37, 44, 73, 255),
+        actions: [
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            child: TextButton(
+              onPressed: () {
+                Get.to(ProfilePage(patientId: widget.recepientId, chatName: widget.chatName));
+              },
+              style: TextButton.styleFrom(
+                  backgroundColor: kCyan,
+                  primary: kDarkBlue,
+                  textStyle: const TextStyle(fontWeight: FontWeight.bold)),
+              child: const Text("View profile"),
+            ),
+          ),
+        ],
       ),
       body: Container(
         decoration: const BoxDecoration(

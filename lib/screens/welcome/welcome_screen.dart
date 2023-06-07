@@ -37,8 +37,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     Widget bodyWidget;
     if (_selectedIndex == 0) {
       bodyWidget = ChatListPage();
-    } else if (_selectedIndex == 1) {
-      bodyWidget = ChatListPage();
     } else {
       bodyWidget = SettingsPage();
     }
@@ -53,10 +51,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home, color: _selectedIndex == 0 ? kCyan : null),
             label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat, color: _selectedIndex == 1 ? kCyan : null),
-            label: 'Chats',
           ),
           BottomNavigationBarItem(
             icon:

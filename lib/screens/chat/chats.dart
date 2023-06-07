@@ -53,7 +53,8 @@ final userController = Get.find<UserController>();
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chats'),
+        title: const Text('Patients'),
+        backgroundColor: const Color.fromARGB(37, 44, 73, 255),
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -69,8 +70,10 @@ final userController = Get.find<UserController>();
             final chatName = chat['chatName'];
             final chatType = chat['chatType'];
             final chatId = chat['chatId'];
+            final recepientId = chat['recepientId'];
 
             return Card(
+              color: kDarkBlue,
               margin:
                   const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
               child: ListTile(
@@ -91,20 +94,13 @@ final userController = Get.find<UserController>();
                   // Handle chat item tap event
                   // Navigate to chat details page or perform any desired action
                   Get.to(ChatComponent(
-                      chatId: chatId, chatName: chatName, chatType: chatType));
+                      chatId: chatId, chatName: chatName, chatType: chatType, recepientId: recepientId));
                 },
               ),
             );
           },
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Perform the desired action when the button is pressed
-          print('Floating Action Button pressed');
-        },
-        child: Icon(Icons.add),
-      ),
+      )
     );
   }
 }
