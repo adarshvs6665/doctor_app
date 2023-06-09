@@ -24,7 +24,7 @@ class _SignupPageState extends State<SignupPage> {
     final payload = jsonEncode({
       'email': emailController.text,
       'password': passwordController.text,
-      'mobileNumber': mobileNumberController.text,
+      'mobile': mobileNumberController.text,
       'name': nameController.text,
     });
     final headers = {'Content-Type': 'application/json'};

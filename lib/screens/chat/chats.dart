@@ -14,7 +14,7 @@ class ChatListPage extends StatefulWidget {
 
 class _ChatListPageState extends State<ChatListPage> {
   List<dynamic> chatList = [];
-final userController = Get.find<UserController>();
+  final userController = Get.find<UserController>();
   @override
   void initState() {
     super.initState();
@@ -29,7 +29,6 @@ final userController = Get.find<UserController>();
     final queryParameters = {
       'doctorId': doctorId,
     };
-    
 
     final response = await http.get(
         Uri.parse(url).replace(queryParameters: queryParameters),
@@ -52,55 +51,80 @@ final userController = Get.find<UserController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Patients'),
-        backgroundColor: const Color.fromARGB(37, 44, 73, 255),
-      ),
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/bg.jpeg'),
-            fit: BoxFit.cover,
+        appBar: AppBar(
+          title: const Text('Home'),
+          backgroundColor: const Color.fromARGB(37, 44, 73, 255),
+          automaticallyImplyLeading: false,
+        ),
+        body: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/bg.jpeg'),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        child: ListView.builder(
-          itemCount: chatList.length,
-          itemBuilder: (context, index) {
-            final chat = chatList[index];
-            final chatName = chat['chatName'];
-            final chatType = chat['chatType'];
-            final chatId = chat['chatId'];
-            final recepientId = chat['recepientId'];
+          child: chatList.length > 0
+              ? ListView.builder(
+                  itemCount: chatList.length,
+                  itemBuilder: (context, index) {
+                    final chat = chatList[index];
+                    final chatName = chat['chatName'];
+                    final chatType = chat['chatType'];
+                    final chatId = chat['chatId'];
+                    final recipientId = chat['recipientId'];
 
-            return Card(
-              color: kDarkBlue,
-              margin:
-                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
-              child: ListTile(
-                leading: chatType == 'group'
-                    ? const Icon(
-                        Icons.group_rounded,
-                        size: 40,
-                        color: Colors.green,
-                      )
-                    : const Icon(
-                        Icons.account_circle,
-                        size: 40,
-                        color: Colors.blue,
+                    return Card(
+                      color: kDarkBlue,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 5.0),
+                      child: ListTile(
+                        leading: chatType == 'group'
+                            ? const Icon(
+                                Icons.group_rounded,
+                                size: 40,
+                                color: Colors.green,
+                              )
+                            : const Icon(
+                                Icons.account_circle,
+                                size: 40,
+                                color: Colors.blue,
+                              ),
+                        title: Text(chatName),
+                        subtitle: Text(chatType),
+                        onTap: () {
+                          // Handle chat item tap event
+                          // Navigate to chat details page or perform any desired action
+                          Get.to(ChatComponent(
+                              chatId: chatId,
+                              chatName: chatName,
+                              chatType: chatType,
+                              recipientId: recipientId));
+                        },
                       ),
-                title: Text(chatName),
-                subtitle: Text(chatType),
-                onTap: () {
-                  // Handle chat item tap event
-                  // Navigate to chat details page or perform any desired action
-                  Get.to(ChatComponent(
-                      chatId: chatId, chatName: chatName, chatType: chatType, recepientId: recepientId));
-                },
-              ),
-            );
-          },
-        ),
-      )
-    );
+                    );
+                  },
+                )
+              : Container(
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.thumb_down_rounded,
+                        color: kCyan,
+                        size: 80.0,
+                      ),
+                      SizedBox(height: 20.0),
+                      Text(
+                        'Nothing to show!',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+        ));
   }
 }

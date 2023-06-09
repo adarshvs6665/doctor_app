@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:doctor_app/screens/patient/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,14 +11,14 @@ class ChatComponent extends StatefulWidget {
   final String chatName;
   final String chatId;
   final String chatType;
-  final String recepientId;
+  final String recipientId;
 
   const ChatComponent(
       {Key? key,
       required this.chatName,
       required this.chatId,
       required this.chatType,
-      required this.recepientId})
+      required this.recipientId})
       : super(key: key);
 
   @override
@@ -197,7 +196,8 @@ class _ChatComponentState extends State<ChatComponent> {
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: TextButton(
               onPressed: () {
-                Get.to(ProfilePage(patientId: widget.recepientId, chatName: widget.chatName));
+                Get.to(ProfilePage(
+                    patientId: widget.recipientId, chatName: widget.chatName));
               },
               style: TextButton.styleFrom(
                   backgroundColor: kCyan,
