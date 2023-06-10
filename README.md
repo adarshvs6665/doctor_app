@@ -1,4 +1,4 @@
-# doctor_app
+# Doctor App
 
 `doctor_app` is a part of the Mental Health Analysis system. It is an app designed for doctors, allowing them to communicate with users and access their profiles and other relevant information.
 
