@@ -21,8 +21,10 @@ Before running the app, make sure you have Flutter installed on your system. If 
 
 Launch the emulator using the following command:
 
-flutter emulators --launch emulatorName
 
+```bash
+flutter emulators --launch emulatorName
+```
 
 Make sure to replace `emulatorName` with the name of your desired emulator.
 
@@ -30,19 +32,21 @@ Make sure to replace `emulatorName` with the name of your desired emulator.
 
 Run the following command to install all the necessary dependencies:
 
-flutter pub get
 
+```bash
+flutter pub get
+```
 
 ### Configuring Backend URL
 
-In the `constants.dart` file located in the app's source code, you will find a constant called `baseUrl`. This constant defines the connection URL of the backend. To connect to the locally hosted backend, please update the URL with your Wi-Fi IP address. Ensure that both the backend and the app are connected to the same Wi-Fi network.
+In the `constants.dart` file located at 'lib/utils/constants.dart' , you will find a constant called `baseUrl`. This constant defines the connection URL of the backend. To connect to the locally hosted backend, please update the URL with your Wi-Fi IP address. Ensure that both the backend and the app are connected to the same Wi-Fi network.
 
 ### Running the App
 
 Finally, run the app using the following command:
-
+```bash
 flutter run
-
+```
 
 This will start the `doctor_app` on the connected emulator or device.
 
